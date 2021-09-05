@@ -1,1 +1,76 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import './app/colors.scss';
+@import './assets/fonts/stylesheet.css';
+
+::selection {
+  color: $pink;
+  background: $lime;
+}
+html, body {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;          /* "auto" or "thin" */
+    scrollbar-color: $pink $lime;   /* scroll thumb and track */
+    ::-webkit-scrollbar {
+      width: 12px;               /* width of the entire scrollbar */
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: $lime;        /* color of the tracking area */
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        border-radius:20px;
+      background-color: $pink;    /* color of the scroll thumb */
+      border: 3px solid $lime;  /* creates padding around scroll thumb */
+    }
+    margin:0px;
+    font-size:16px;
+    max-width:100vw;
+    min-width:100vw;
+    max-height:100vh;
+    min-height:100vh;
+    display:grid;
+    grid-template-areas:
+    'body';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-content: stretch;
+    align-content: start;
+    overflow:hidden;
+    @media (max-width:1600px) {
+        font-size:14px;
+    }
+    @media (max-width:1450px) {
+        font-size:12px;
+    }
+    @media (max-width:1250px) {
+        font-size:10px;
+    }
+    @media (max-width:1000px) {
+        font-size:8px;
+    }
+}
+html {
+    h1 {
+        font-family: 'Mandalore';
+    }
+    h3, h4, h5, h6 {
+        font-family:'Mandalore';
+    }
+    h2 {
+        font-family: 'Mandalore';
+        font-weight:100;
+        &.fat {
+            
+            font-weight:900;
+        }
+    }
+    font-family: 'Mandalore';
+}
+
+body {
+    grid-area:body;
+    grid-template-areas:
+    'app-root';
+}

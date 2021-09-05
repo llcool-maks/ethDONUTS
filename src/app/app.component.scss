@@ -1,0 +1,43 @@
+@import './colors.scss';
+
+:host {
+    grid-area:app-root;
+    max-width:100vw;
+    min-width:100vw;
+    max-height:100vh;
+    min-height:100vh;
+    overflow:hidden;
+    display:grid;
+    grid-template-areas:
+    'main';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-content: stretch;
+    align-content: start;
+    pointer-events: none;
+    app-top-banner {
+        grid-area:top-banner;
+        z-index:3;
+    }
+    main {
+        pointer-events: none;
+        display:grid;
+        z-index:2;
+        grid-area:main;
+        max-width:100vw;
+        min-width:100vw;
+        // max-height:100vh;
+        min-height:100vh;
+        overflow:hidden;
+        justify-content: stretch;
+        align-content: start;
+        grid-template-areas:
+        'bakery';
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        router-outlet, router-outlet + * {
+            grid-area:bakery;
+        }
+        
+    }
+}

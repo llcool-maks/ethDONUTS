@@ -1,0 +1,49 @@
+<section class="view-box">
+    <app-donut [metadata]="(metadata | async)" [wide]="true" [randomizeThese]="false" [randomizeLoopThese]="false"></app-donut>
+    <div class="stats" *ngIf="(raritiesFromService | async) as rarities">
+        <span class="stat-line">
+            <p class="title">
+                Icing Type:
+            </p>
+            <p class="value">
+                {{rarities.icing_type[0]}}
+            </p>
+            <p class="rarity-percentage">
+                {{rarities.icing_type[1]}}% chance
+            </p>
+        </span>
+        <span class="stat-line">
+            <p class="title">
+                Icing Color:
+            </p>
+            <p class="value">
+                {{rarities.icing_color[0]}}
+            </p>
+            <p class="rarity-percentage">
+                {{rarities.icing_color[1]}}% chance
+            </p>
+        </span>
+        <span class="stat-line">
+            <p class="title">
+                Dough Color:
+            </p>
+            <p class="value">
+                {{rarities.dough_color[0]}}
+            </p>
+            <p class="rarity-percentage">
+                {{rarities.dough_color[1]}}% chance
+            </p>
+        </span>
+        <span class="stat-line">
+            <p class="title">
+                Background Color:
+            </p>
+            <p class="value">
+                {{rarities.background_color[0]}}
+            </p>
+            <p class="rarity-percentage">
+                {{rarities.background_color[1]}}% chance
+            </p>
+        </span>
+    </div>
+</section>

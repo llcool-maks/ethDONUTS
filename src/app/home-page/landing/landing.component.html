@@ -1,0 +1,28 @@
+    <span class="tag">
+        <div class="cost">
+            <p>
+                Donut Hodlers: {{owners | async}}
+            </p>
+            <p>
+                Donuts you Hodl: {{youOwn | async}}
+            </p>
+        </div>
+        <h2>
+            Bake your own donuts today.
+        </h2>
+        <div class="cost">
+            <p>
+                <small>(minting)</small> Baking Cost: {{mintCost | async}} ETH
+            </p>
+        </div>
+        <div class="minter" (click)="mintDonuts()">
+            <p>
+                {{mintButtonText | async}}
+            </p>
+        </div>
+        <div class="cost">
+            <p>
+                Total Donuts Baked: {{minted | async}} / {{maxMinted | async}}
+            </p>
+        </div>
+    </span>

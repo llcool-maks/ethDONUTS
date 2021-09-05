@@ -1,0 +1,25 @@
+@import '../colors.scss';
+
+:host {
+    grid-area:bakery;
+    display:grid;
+    grid-template-areas:
+    'home';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    section.home {
+        grid-area:home;
+        display:grid;
+        grid-template-areas:
+        'donuts . aside'
+        'donuts . aside';
+        grid-template-columns: 40vw 5rem 1fr;
+        grid-template-rows: 1fr 1fr;
+        span.donuts {
+            grid-area:donuts;
+        }
+        aside, aside + * {
+            grid-area:aside;
+        }
+    }
+}

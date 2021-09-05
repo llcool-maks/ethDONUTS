@@ -1,0 +1,47 @@
+@import '../colors.scss';
+
+:host {
+    position:absolute;
+    top:0px;
+    left:0px;
+    grid-area: main;
+    max-width:15rem;
+    min-width:15rem;
+    max-height:5rem;
+    min-height:5rem;
+    display:grid;
+    grid-template-areas:
+    'back';
+    z-index:9999;
+    section.back {
+        background:rgba(0,0,0,0.7);
+        max-width:100%;
+        min-width:100%;
+        max-height:100%;
+        min-height:100%;
+        display:grid;
+        grid-template-areas:
+        'go-back';
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        pointer-events: all;
+        cursor: pointer;
+        transition: 0.2s;
+        p {
+            grid-area:go-back;
+            margin:0px;
+            color:$pink;
+            font-size:2rem;
+            align-self:center;
+            justify-self:center;
+            text-align: center;
+            transition: 0.2s;
+        }
+        &:hover {
+            background:rgba(0,0,0,0.9);
+            p {
+                font-size:3rem;
+            }
+        }
+    }
+}

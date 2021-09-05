@@ -1,0 +1,13 @@
+
+@font-face {
+    font-family: 'Mandalore';
+    src: url('MandaloreTitle.eot');
+    src: url('MandaloreTitle.eot?#iefix') format('embedded-opentype'),
+        url('MandaloreTitle.woff2') format('woff2'),
+        url('MandaloreTitle.woff') format('woff'),
+        url('MandaloreTitle.ttf') format('truetype'),
+        url('MandaloreTitle.svg#MandaloreTitle') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
