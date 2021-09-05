@@ -8,6 +8,9 @@ import { SearchForADonutComponent } from './search-for-a-donut.component';
   declarations: [SearchForADonutComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SearchForADonutComponent
   ]
 })
 export class SearchForADonutModule { }

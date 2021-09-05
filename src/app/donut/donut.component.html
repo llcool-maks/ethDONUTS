@@ -482,3 +482,5 @@
     <animateTransform attributeName="transform" attributeType="auto" type="skewY" values="0;-10;0" calcMode="spline" keyTimes="0;0.5;1" keySplines="0 0 1 1;0 0 1 1" dur="4s" begin="0s" repeatCount="indefinite" additive="sum" accumulate="none" fill="freeze" id="animateTransform6341"></animateTransform>
   </g>
 </svg>
+
+<div class="indexed" *ngIf="indexed !== -1" [ngClass]="{'small': indexed.length > 2}">{{indexed}}</div>

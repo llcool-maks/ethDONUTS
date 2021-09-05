@@ -1,0 +1,3 @@
+<section class="your-donuts" #yourDonuts>
+    <app-donut (click)="goToDonut(index)" [indexed]="index" [metadata]="donut[1]" [small]="true" [randomizeThese]="false" [randomizeLoopThese]="false" *ngFor="let donut of userDonuts; let index = index"></app-donut>
+</section>

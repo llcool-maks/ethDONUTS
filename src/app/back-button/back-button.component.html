@@ -1,5 +1,5 @@
-<section class="back" *ngIf="!(onHomePage | async) || (showPopUp | async)" (click)="back()">
+<section class="back" *ngIf="(onHomePage | async) === false || (showPopUp | async) === true" (click)="back()">
     <p>
-        Go Back
+        Home
     </p>
 </section>

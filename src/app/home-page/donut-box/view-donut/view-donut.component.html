@@ -1,5 +1,5 @@
 <section class="view-box">
-    <app-donut [metadata]="(metadata | async)" [wide]="true" [randomizeThese]="false" [randomizeLoopThese]="false"></app-donut>
+    <app-donut [indexed]="id" [metadata]="(metadata | async)" [wide]="true" [randomizeThese]="false" [randomizeLoopThese]="false"></app-donut>
     <div class="stats" *ngIf="(raritiesFromService | async) as rarities">
         <span class="stat-line">
             <p class="title">

@@ -1,6 +1,10 @@
 @import '../colors.scss';
 
 :host {
+    max-width:100%;
+    min-width:100%;
+    max-height:100%;
+    min-height:100%;
     grid-area:bakery;
     display:grid;
     grid-template-areas:
@@ -8,18 +12,112 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     section.home {
+        max-width:100%;
+        min-width:100%;
+        max-height:100%;
+        min-height:100%;
         grid-area:home;
         display:grid;
         grid-template-areas:
         'donuts . aside'
         'donuts . aside';
-        grid-template-columns: 40vw 5rem 1fr;
+        grid-template-columns: 40vw 5rem calc(60vw - 5rem);
         grid-template-rows: 1fr 1fr;
         span.donuts {
+            app-donut {
+                &.wide {
+                    display:none;
+                }
+            }
             grid-area:donuts;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            grid-template-rows: 1fr;
         }
         aside, aside + * {
             grid-area:aside;
+        }
+        aside {
+            pointer-events: none;
+            display:grid;
+            z-index:2;
+            max-width: calc(60vw - 5rem);
+            min-width: calc(60vw - 5rem);
+            max-height:100vh;
+            min-height:100vh;
+            overflow:hidden;
+            justify-content: stretch;
+            align-content: start;
+            grid-template-areas:
+            'aside';
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            router-outlet, router-outlet + * {
+                grid-area:aside;
+            }
+            
+        }
+        nav {
+            grid-area:aside;
+            align-self:start;
+            max-height:5vh;
+            min-height:5vh;
+            max-width:100%;
+            min-width:100%;
+            display:grid;
+            grid-template-columns: 0.3fr 0.3fr 0.4fr;
+            grid-template-rows: 1vh 1fr;
+            justify-content: stretch;
+            justify-items:stretch;
+            align-content: center;
+            align-items: center;
+            column-gap:2rem;
+            div.nav-button {
+                transition:.2s;
+                justify-self:stretch;
+                align-self:center;
+                align-content:center;
+                align-items:center;
+                display:grid;
+                max-height:100%;
+                min-height:100%;
+                max-width:100%;
+                min-width:100%;
+                pointer-events: all;
+                cursor: pointer;
+                background:$pink;
+                padding:0.1vh;
+                font-size:1.25rem;
+                filter:drop-shadow(0px 0px 2.5px rgba(0,0,0,0.4));
+                &.selected {
+                    background:$blue;
+                    color:$pink;
+                }
+            }
+        }
+        @media (max-width:650px) {
+            grid-template-areas:
+            'aside'
+            '.'
+            'donuts';
+            grid-template-columns: 1fr;
+            grid-template-rows: calc(75vh - 5rem) 5rem 25vh;
+            aside {
+                max-width:100%;
+                min-width:100%;
+                max-height:100%;
+                min-height:100%;
+            }
+            app-donut {
+                display:none;
+                &.wide {
+                    display:inline!important;
+                }
+            }
+            nav {
+                justify-content:center;
+                justify-items:center;
+            }
         }
     }
 }

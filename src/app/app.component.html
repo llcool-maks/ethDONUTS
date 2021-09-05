@@ -1,5 +1,5 @@
-<main>
-  <router-outlet></router-outlet>
+<main [@routerAnimations]="outlet.isActivated ? outlet.activatedRoute : ''">
+  <router-outlet #outlet="outlet"></router-outlet>
 </main>
 <app-newly-minted-pop-up *ngIf="(showPopUp | async)"></app-newly-minted-pop-up>
-<app-back-button></app-back-button>
+<app-back-button *ngIf="(showPopUp | async) || (onHomePage | async) === false" [@fadeAnimations]></app-back-button>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Web3Service } from '../web3.service';
+import { HomePageService } from '../home-page/home-page.service';
 
 @Component({
   selector: 'app-back-button',
@@ -10,28 +11,32 @@ import { Web3Service } from '../web3.service';
 })
 export class BackButtonComponent implements OnInit {
 
-  onHomePage = new BehaviorSubject(true);
+  onHomePage = this.web3.onHomePage;
   showPopUp: BehaviorSubject<boolean> = this.web3.newlyMintedPopup;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private web3: Web3Service
+    private web3: Web3Service,
+    private homePageService: HomePageService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.url.subscribe(url => {
-      console.dir(url);
-      if (url[0].path !== '') {
-        this.onHomePage.next(false);
-      }
-    });
+    // this.activatedRoute.url.subscribe(url => {
+    //   if (url[0].path !== '') {
+    //     this.onHomePage.next(false);
+    //   }
+    // });
   }
 
   back(): void {
-    if (this.onHomePage) {
+    if (this.onHomePage.getValue() === true) {
       this.showPopUp.next(false);
       return;
     }
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('', {skipLocationChange: true});
+    this.web3.onHomePage.next(true);
+    this.renderer.removeClass(this.homePageService.getSelectors().donutBoxNav.getValue().nativeElement, 'selected');
+    this.renderer.removeClass(this.homePageService.getSelectors().yourDonutsNav.getValue().nativeElement, 'selected');
   }
 }

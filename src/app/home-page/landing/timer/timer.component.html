@@ -1,0 +1,20 @@
+
+  <p *ngIf="(((startTime | async) * 1000) - currentTime) > 1">Time until Baking <small>(Minting)</small></p>
+  <span class="countdown" *ngIf="(((startTime | async) * 1000) - currentTime) > 1">
+     <span class="days"> <!-- DAYS -->
+      
+        {{((((startTime | async) * 1000) - currentTime)) / 86400000 | floor}} days,
+    </span>
+    <span class="hours"><!-- HOURS -->
+      
+        {{((((startTime | async) * 1000) - currentTime)) % 86400000 / 3600000 | floor}} hours,
+    </span>
+    <span class="minutes"><!-- MINUTES -->
+      
+        {{((((startTime | async) * 1000) - currentTime)) % 86400000 % 3600000 / 60000 | floor}} minutes,
+    </span>
+    <span class="seconds"><!-- SECONDS -->
+
+        and {{((((startTime | async) * 1000) - currentTime)) % 86400000 % 3600000 % 60000 / 1000 | floor}} seconds
+    </span>
+</span>

@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page.component';
 import { DonutModule } from '../donut/donut.module';
-import { LandingModule } from './landing/landing.module';
+import { RouterModule } from '@angular/router';
+import { SearchForADonutModule } from './search-for-a-donut/search-for-a-donut.module';
 
 
 
@@ -11,7 +12,8 @@ import { LandingModule } from './landing/landing.module';
   imports: [
     CommonModule,
     DonutModule,
-    LandingModule
+    RouterModule,
+    SearchForADonutModule
   ],
   exports: [
     HomePageComponent

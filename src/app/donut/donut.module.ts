@@ -15,6 +15,6 @@ import { DonutComponent } from './donut.component';
   ],
   exports: [
     DonutComponent
-  ]
+  ],
 })
 export class DonutModule { }

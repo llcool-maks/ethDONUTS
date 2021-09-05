@@ -8,7 +8,9 @@ import { DonutService } from './donut.service';
 })
 export class DonutComponent implements AfterContentInit{
 
+  @Input() indexed = -1;
   @Input() @HostBinding('class.wide') wide = false;
+  @Input() @HostBinding('class.small') small = false;
   variants = {
     icing_type: [
       {
@@ -179,6 +181,10 @@ export class DonutComponent implements AfterContentInit{
   @Input() randomizeLoopThese = true;
 
   @Input() metadata = {
+    0: 1,
+    1: 2,
+    2: 3,
+    3: 4,
     icing_type: 0,
     icing_color: 0,
     dough_color: 2,

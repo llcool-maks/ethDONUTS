@@ -69,30 +69,26 @@ export class Web3Service {
   myAddress: BehaviorSubject<any> = new BehaviorSubject(0); // USER ADDRESS
 
   // BROWSER VARIABLES
-  isOnline: BehaviorSubject<boolean> = new BehaviorSubject(false); // LINE 101 (DISABLED) - TELLS APP IF BROWSER IS CONNECTED TO THE INTERNET OR NOT
+  onHomePage: BehaviorSubject<boolean> = new BehaviorSubject(true); // LINE 101 (DISABLED) - TELLS APP IF BROWSER IS CONNECTED TO THE INTERNET OR NOT
   // CONTRACT VARIABLES
   EthDonutsContract; // LINE 141-161 - THIS OBJECT IS YOUR ACTUAL SOLIDITY CONTRACT, INITIALIZED WITH THE ABI JSON AND THE CONTRACT'S ADDRESS
   EthDonutsAddress = '0x33D98600272cDD1b6e62eA3601a952D64dAc4071'; // LINE 161 - GETS CALLED TO BUILD THE CONTRACT
-  mintedDonuts = new BehaviorSubject(2); // LINED 166 - THIS IS THE AMOUNT OF CURRENTLY MINTED DONUTS, PULLED FROM THE CONTRACT VIA WEB3
-  mintCost = new BehaviorSubject(2); // LINE 143 - THIS IS THE COST OF MINTING EACH DONUT, PULLED FROM THE CONTRACT VIA WEB3
-  mintingOpens = new BehaviorSubject(5); // LINE 149 - THIS IS THE MINTING OPENING TIME IN UNIX TIMESTAMP FORMAT, PULLED FROM THE CONTRACT VIA WEB3
+  mintedDonuts = new BehaviorSubject(2); // LINED 161 - THIS IS THE AMOUNT OF CURRENTLY MINTED DONUTS, PULLED FROM THE CONTRACT VIA WEB3
+  maxMintedDonuts = new BehaviorSubject(2); // LINED 155 - THIS IS THE AMOUNT OF CURRENTLY MINTED DONUTS, PULLED FROM THE CONTRACT VIA WEB3
+  mintCost = new BehaviorSubject(2); // LINE 138 - THIS IS THE COST OF MINTING EACH DONUT, PULLED FROM THE CONTRACT VIA WEB3
+  mintingOpens = new BehaviorSubject(5); // LINE 144 - THIS IS THE MINTING OPENING TIME IN UNIX TIMESTAMP FORMAT, PULLED FROM THE CONTRACT VIA WEB3
 
   // APP VARIABLES
-  mintButtonText = new BehaviorSubject('Mint Donut'); // LINE 198-219 - THIS BEHAVIOR SUBJECT IS UPDATED DYNAMICALLY WHEN THE CLAIM FUNCTION IS CALLED TO UPDATE THE BUTTON ON THE FRONT END
+  mintButtonText = new BehaviorSubject('Mint Donut'); // LINE 193-214 - THIS BEHAVIOR SUBJECT IS UPDATED DYNAMICALLY WHEN THE CLAIM FUNCTION IS CALLED TO UPDATE THE BUTTON ON THE FRONT END
   newlyMintedPopup = new BehaviorSubject(false);
   objectName = 'Donut';
 
 
   // CONTRACT OUTPUT
-  donuts: any[] = []; // LINE 172 - AN ARRAY OF ALL THE DONUTS THAT HAVE BEEN MINTED
-  storedDonutCount = 0; // LINE 171 - HOW MANY DONUTS HAVE BEEN STORED IN THE ABOVE ARRAY
-  userDonuts: any[] = []; // LINE 175 - AN ARRAY OF ALL THIS USER'S DONUTS
-
-
-
-
-
-
+  donuts: any[] = []; // LINE 167 - AN ARRAY OF ALL THE DONUTS THAT HAVE BEEN MINTED
+  storedDonutCount = 0; // LINE 166 - HOW MANY DONUTS HAVE BEEN STORED IN THE ABOVE ARRAY
+  userDonuts: any[] = []; // LINE 171 - AN ARRAY OF ALL THIS USER'S DONUTS
+  userStoredDonutCount = 0; // LINE 169 - HOW MANY DONUTS HAVE BEEN STORED IN THE ABOVE ARRAY
 
 
 
@@ -117,10 +113,8 @@ export class Web3Service {
         });
         this.web3.eth.defaultAccount = myAddresses[0];
       });
-      this.getMintingOpen();
-      this.getMintingPrice();
-      this.getMintedDonuts();
       this.getAllDonuts();
+      this.getData();
       setInterval(() => {
         this.web3.eth.getChainId().then(result => {
           if (result !== this.chainId.getValue()) {
@@ -157,6 +151,12 @@ export class Web3Service {
     this.EthDonutsContract = new this.web3.eth.Contract(EthDonutsABI, this.EthDonutsAddress);
   }
 
+  async getMaxMintedDonuts(): Promise<any> {
+    await this.EthDonutsContract.methods.MAX_MINT_NR().call().then(results => {
+      this.maxMintedDonuts.next(results);
+    }).catch({});
+  }
+
   async getMintedDonuts(): Promise<any> {
     await this.EthDonutsContract.methods.actualMintNr().call().then(results => {
       this.mintedDonuts.next(results);
@@ -170,6 +170,7 @@ export class Web3Service {
         this.donuts.push(results);
         await this.EthDonutsContract.methods.ownerOf(index).call().then((resultsIsOwner: any) => {
           if (resultsIsOwner === this.myAddress.getValue()) {
+            this.userStoredDonutCount = this.userStoredDonutCount + 1;
             this.userDonuts.push([results, index]);
           }
         }).catch({});
@@ -212,6 +213,13 @@ export class Web3Service {
   async displayMintedDonutAfterItsMinted(id: number): Promise<any> {
     this.getSpecificDonut(id);
     this.newlyMintedPopup.next(true);
+  }
+
+  async getData(): Promise<any> {
+      this.getMintingOpen();
+      this.getMintingPrice();
+      this.getMintedDonuts();
+      this.getMaxMintedDonuts();
   }
 
 }

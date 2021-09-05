@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Web3Service } from 'src/app/web3.service';
 import { BehaviorSubject } from 'rxjs';
@@ -9,7 +9,7 @@ import { DonutService } from 'src/app/donut/donut.service';
   templateUrl: './view-donut.component.html',
   styleUrls: ['./view-donut.component.scss']
 })
-export class ViewDonutComponent implements OnInit {
+export class ViewDonutComponent implements OnInit, AfterContentInit {
 
   id;
   metadata: BehaviorSubject<any> = this.web3.specificDonut;
@@ -30,6 +30,10 @@ export class ViewDonutComponent implements OnInit {
         console.dir(test);
       });
     });
+  }
+
+  ngAfterContentInit(): void {
+    this.web3.onHomePage.next(false);
   }
 
 }

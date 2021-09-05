@@ -3,10 +3,24 @@
     <span class="donuts">
         <app-donut></app-donut>
         <app-donut></app-donut>
+        <app-donut class="wide" [wide]="true"></app-donut>
     </span>
+
+    <nav>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="nav-button" (click)="goToDonutBox()" #donutBoxNav>
+            Donut Box
+        </div>
+        <div class="nav-button" (click)="goToYourDonuts()" #yourDonutsNav>
+            Your Donuts
+        </div>
+        <app-search-for-a-donut></app-search-for-a-donut>
+    </nav>
     
-    <aside>
-        <router-outlet></router-outlet>
+    <aside [@routerAnimations]="outlet.isActivated ? outlet.activatedRoute : ''">
+        <router-outlet #outlet="outlet"></router-outlet>
     </aside>
 
 </section>

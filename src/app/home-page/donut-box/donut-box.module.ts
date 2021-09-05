@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DonutBoxComponent } from './donut-box.component';
 import { ViewDonutModule } from './view-donut/view-donut.module';
+import { DonutModule } from 'src/app/donut/donut.module';
 
 
 
@@ -9,7 +10,8 @@ import { ViewDonutModule } from './view-donut/view-donut.module';
   declarations: [DonutBoxComponent],
   imports: [
     CommonModule,
-    ViewDonutModule
+    ViewDonutModule,
+    DonutModule
   ],
   exports: [
     DonutBoxComponent

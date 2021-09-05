@@ -50,6 +50,9 @@ html, body {
     @media (max-width:1000px) {
         font-size:8px;
     }
+    @media (max-height:400px) {
+        font-size:8px;
+    }
 }
 html {
     h1 {

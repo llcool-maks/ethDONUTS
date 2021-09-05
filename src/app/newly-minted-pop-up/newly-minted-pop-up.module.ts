@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewlyMintedPopUpComponent } from './newly-minted-pop-up.component';
-import { ViewDonutModule } from '../donut-box/view-donut/view-donut.module';
+import { ViewDonutModule } from '../home-page/donut-box/view-donut/view-donut.module';
 
 
 
