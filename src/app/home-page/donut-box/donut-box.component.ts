@@ -46,9 +46,6 @@ export class DonutBoxComponent implements AfterContentInit{
   }
 
   goToDonut(index: number): void {
-    if (!Number(index)) {
-      return;
-    }
     if (Number(index) > this.mintedDonuts.getValue()) {
       return;
     }

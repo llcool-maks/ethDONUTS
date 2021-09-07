@@ -30,10 +30,7 @@ export class BackButtonComponent implements OnInit {
   }
 
   back(): void {
-    if (this.onHomePage.getValue() === true) {
-      this.showPopUp.next(false);
-      return;
-    }
+    this.showPopUp.next(false);
     this.router.navigateByUrl('', {skipLocationChange: true});
     this.web3.onHomePage.next(true);
     this.renderer.removeClass(this.homePageService.getSelectors().donutBoxNav.getValue().nativeElement, 'selected');

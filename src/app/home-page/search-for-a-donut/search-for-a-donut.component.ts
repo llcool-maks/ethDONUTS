@@ -21,7 +21,7 @@ export class SearchForADonutComponent implements OnInit {
   }
 
   goToResult(): void {
-    if (!Number(this.searchInput.nativeElement.value)) {
+    if (Number(this.searchInput.nativeElement.value) < 0) {
       return;
     }
     if (Number(this.searchInput.nativeElement.value) > this.mintedDonuts.getValue()) {

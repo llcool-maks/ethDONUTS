@@ -39,6 +39,11 @@ export class HomePageComponent implements OnInit, AfterContentInit {
     this.web3.onHomePage.next(false);
   }
 
+  goToInfoPage(): void {
+    this.router.navigateByUrl('/info-page', {skipLocationChange: true});
+    this.web3.onHomePage.next(false);
+  }
+
   ngAfterContentInit(): void {
     setTimeout(() => {
       this.homePageService.donutBoxNav.next(this.donutBoxNav);

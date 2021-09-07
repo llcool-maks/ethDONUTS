@@ -95,6 +95,23 @@
                 }
             }
         }
+        div.info-button {
+            grid-area: donuts;
+            align-self: end;
+            &:hover {
+                svg {
+                    fill:$pink;
+                    border:5px solid $white;
+                    border-radius:100px;
+                    transform:scale(4);
+                }
+            }
+            svg {
+                transition:0.2s;
+                pointer-events: all;
+                cursor: pointer;
+            }
+        }
         @media (max-width:650px) {
             grid-template-areas:
             'aside'

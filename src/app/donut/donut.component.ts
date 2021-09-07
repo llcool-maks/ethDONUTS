@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, Input, HostBinding, AfterContentInit } from '@angular/core';
 import { DonutService } from './donut.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-donut',
@@ -70,7 +71,7 @@ export class DonutComponent implements AfterContentInit{
         '#85d400',
         '#bcff39'
       ],
-      rarity: 12
+      rarity: 3
     },
       {
         value: [
@@ -79,7 +80,7 @@ export class DonutComponent implements AfterContentInit{
         '#006BB8',
         '#003C66'
       ],
-      rarity: 12
+      rarity: 3
     },
       {
         value: [
@@ -88,7 +89,7 @@ export class DonutComponent implements AfterContentInit{
         '#991E2F',
         '#55111A'
       ],
-      rarity: 12
+      rarity: 3
     },
       {
         value: [
@@ -97,7 +98,7 @@ export class DonutComponent implements AfterContentInit{
         '#726D09',
         '#4B4806'
       ],
-      rarity: 12
+      rarity: 3
     },
       {
         value: [
@@ -106,7 +107,7 @@ export class DonutComponent implements AfterContentInit{
         '#580E34',
         '#E972AF'
       ],
-      rarity: 12
+      rarity: 3
     },
       {
         value: [
@@ -115,7 +116,7 @@ export class DonutComponent implements AfterContentInit{
         '#3A6955',
         '#244235'
       ],
-      rarity: 12
+      rarity: 3
     },
       {
         value: [
@@ -124,7 +125,7 @@ export class DonutComponent implements AfterContentInit{
         '#372867',
         '#2F2258'
       ],
-      rarity: 12
+      rarity: 3
     },
       {
         value: [
@@ -133,7 +134,277 @@ export class DonutComponent implements AfterContentInit{
         '#3E2556',
         '#291839'
       ],
-      rarity: 12
+      rarity: 3
+    },
+    {
+      value: [
+        '#561643',
+        '#bc08ff',
+        '#45ff37',
+        '#bc08ff',
+        '#561643'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#6C0E23',
+        '#C42021',
+        '#6C0E23',
+        '#C42021',
+        '#6C0E23'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#C42021',
+        '#6C0E23',
+        '#C42021',
+        '#6C0E23',
+        '#C42021'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#F3FFB9',
+        '#C42021',
+        '#6C0E23',
+        '#C42021',
+        '#F3FFB9'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#006494',
+        '#00A6FB',
+        '#006494',
+        '#00A6FB',
+        '#006494'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#00A6FB',
+        '#006494',
+        '#00A6FB',
+        '#006494',
+        '#00A6FB'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#003554',
+        '#006494',
+        '#003554',
+        '#006494',
+        '#003554'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#051923',
+        '#006494',
+        '#051923',
+        '#006494',
+        '#051923'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#051923',
+        '#45ff37',
+        '#051923',
+        '#45ff37',
+        '#051923'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#45ff37',
+        '#051923',
+        '#45ff37',
+        '#051923',
+        '#45ff37'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#45ff37',
+        '#051923',
+        '#003554',
+        '#051923',
+        '#45ff37'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#003554',
+        '#051923',
+        '#003554',
+        '#051923',
+        '#003554'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#139A43',
+        '#051923',
+        '#139A43',
+        '#051923',
+        '#139A43'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#051923',
+        '#0B5D1E',
+        '#051923',
+        '#0B5D1E',
+        '#051923'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#139A43',
+        '#053B06',
+        '#139A43',
+        '#053B06',
+        '#139A43'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#053B06',
+        '#139A43',
+        '#053B06',
+        '#139A43',
+        '#053B06'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#0DAB76',
+        '#139A43',
+        '#0DAB76',
+        '#139A43',
+        '#0DAB76'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#139A43',
+        '#0DAB76',
+        '#139A43',
+        '#0DAB76',
+        '#139A43'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#0DAB76',
+        '#0B5D1E',
+        '#0DAB76',
+        '#0B5D1E',
+        '#0DAB76'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#139A43',
+        '#0B5D1E',
+        '#139A43',
+        '#0B5D1E',
+        '#139A43'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#EB8258',
+        '#0DAB76',
+        '#EB8258',
+        '#0DAB76',
+        '#EB8258'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#F6F740',
+        '#EB8258',
+        '#F6F740',
+        '#EB8258',
+        '#F6F740'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#F6F740',
+        '#6689A1',
+        '#995D81',
+        '#6689A1',
+        '#F6F740'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#995D81',
+        '#6689A1',
+        '#995D81',
+        '#6689A1',
+        '#995D81'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#F6F740',
+        '#FDE74C',
+        '#F6F740',
+        '#FDE74C',
+        '#F6F740'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#DB5461',
+        '#FDE74C',
+        '#ED217C',
+        '#FDE74C',
+        '#DB5461'
+      ],
+      rarity: 3
+    },
+    {
+      value: [
+        '#DB5461',
+        '#ED217C',
+        '#DB5461',
+        '#ED217C',
+        '#DB5461'
+      ],
+      rarity: 3
     },
     ],
     dough_color: [
@@ -172,6 +443,738 @@ export class DonutComponent implements AfterContentInit{
       ],
       rarity: 20
       },
+    ],
+    background_color: [
+      {
+        value: [
+          '#ff5dff',
+          '#45d9da',
+          '#eadd37',
+          '#bc08ff',
+          '#45ff37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#ff5dff',
+          '#ff5dff',
+          '#eadd37',
+          '#bc08ff',
+          '#45ff37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#ff5dff',
+          '#eadd37',
+          '#ff5dff',
+          '#bc08ff',
+          '#45ff37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#ff5dff',
+          '#eadd37',
+          '#ff5dff',
+          '#bc08ff',
+          '#45ff37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#ff5dff',
+          '#bc08ff',
+          '#ff5dff',
+          '#bc08ff',
+          '#ff5dff'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#eadd37',
+          '#ff5dff',
+          '#eadd37',
+          '#bc08ff',
+          '#45ff37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#eadd37',
+          '#bc08ff',
+          '#eadd37',
+          '#bc08ff',
+          '#eadd37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#bc08ff',
+          '#eadd37',
+          '#bc08ff',
+          '#eadd37',
+          '#bc08ff'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#eadd37',
+          '#45ff37',
+          '#bc08ff',
+          '#45ff37',
+          '#eadd37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#561643',
+          '#bc08ff',
+          '#45ff37',
+          '#bc08ff',
+          '#561643'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#6C0E23',
+          '#C42021',
+          '#6C0E23',
+          '#C42021',
+          '#6C0E23'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#C42021',
+          '#6C0E23',
+          '#C42021',
+          '#6C0E23',
+          '#C42021'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#F3FFB9',
+          '#C42021',
+          '#6C0E23',
+          '#C42021',
+          '#F3FFB9'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#006494',
+          '#00A6FB',
+          '#006494',
+          '#00A6FB',
+          '#006494'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#00A6FB',
+          '#006494',
+          '#00A6FB',
+          '#006494',
+          '#00A6FB'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#003554',
+          '#006494',
+          '#003554',
+          '#006494',
+          '#003554'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#051923',
+          '#006494',
+          '#051923',
+          '#006494',
+          '#051923'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#051923',
+          '#45ff37',
+          '#051923',
+          '#45ff37',
+          '#051923'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#45ff37',
+          '#051923',
+          '#45ff37',
+          '#051923',
+          '#45ff37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#45ff37',
+          '#051923',
+          '#003554',
+          '#051923',
+          '#45ff37'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#003554',
+          '#051923',
+          '#003554',
+          '#051923',
+          '#003554'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#139A43',
+          '#051923',
+          '#139A43',
+          '#051923',
+          '#139A43'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#051923',
+          '#0B5D1E',
+          '#051923',
+          '#0B5D1E',
+          '#051923'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#139A43',
+          '#053B06',
+          '#139A43',
+          '#053B06',
+          '#139A43'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#053B06',
+          '#139A43',
+          '#053B06',
+          '#139A43',
+          '#053B06'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#0DAB76',
+          '#139A43',
+          '#0DAB76',
+          '#139A43',
+          '#0DAB76'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#139A43',
+          '#0DAB76',
+          '#139A43',
+          '#0DAB76',
+          '#139A43'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#0DAB76',
+          '#0B5D1E',
+          '#0DAB76',
+          '#0B5D1E',
+          '#0DAB76'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#139A43',
+          '#0B5D1E',
+          '#139A43',
+          '#0B5D1E',
+          '#139A43'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#EB8258',
+          '#0DAB76',
+          '#EB8258',
+          '#0DAB76',
+          '#EB8258'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#F6F740',
+          '#EB8258',
+          '#F6F740',
+          '#EB8258',
+          '#F6F740'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#F6F740',
+          '#6689A1',
+          '#995D81',
+          '#6689A1',
+          '#F6F740'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#995D81',
+          '#6689A1',
+          '#995D81',
+          '#6689A1',
+          '#995D81'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#F6F740',
+          '#FDE74C',
+          '#F6F740',
+          '#FDE74C',
+          '#F6F740'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#DB5461',
+          '#FDE74C',
+          '#ED217C',
+          '#FDE74C',
+          '#DB5461'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#DB5461',
+          '#ED217C',
+          '#DB5461',
+          '#ED217C',
+          '#DB5461'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#2D3047',
+          '#DB5461',
+          '#1B998B',
+          '#DB5461',
+          '#2D3047'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#1B998B',
+          '#2D3047',
+          '#1B998B',
+          '#2D3047',
+          '#1B998B'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#1B998B',
+          '#2D3047',
+          '#DB5461',
+          '#2D3047',
+          '#1B998B'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#DB5461',
+          '#D34F73',
+          '#DB5461',
+          '#D34F73',
+          '#DB5461'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#D34F73',
+          '#6DD6DA',
+          '#D34F73',
+          '#6DD6DA',
+          '#D34F73'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#95D9DA',
+          '#AE8CA3',
+          '#95D9DA',
+          '#AE8CA3',
+          '#95D9DA'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#C20114',
+          '#AE8CA3',
+          '#C20114',
+          '#AE8CA3',
+          '#C20114'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#7CFFC4',
+          '#C20114',
+          '#7CFFC4',
+          '#C20114',
+          '#7CFFC4'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#6ABEA7',
+          '#7CFFC4',
+          '#6ABEA7',
+          '#7CFFC4',
+          '#6ABEA7'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#9FFFF5',
+          '#6ABEA7',
+          '#9FFFF5',
+          '#6ABEA7',
+          '#9FFFF5'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#9FFFF5',
+          '#BDFFFD',
+          '#6ABEA7',
+          '#BDFFFD',
+          '#9FFFF5'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#BDFFFD',
+          '#B287A3',
+          '#BDFFFD',
+          '#B287A3',
+          '#BDFFFD'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#7E4E60',
+          '#B287A3',
+          '#7E4E60',
+          '#B287A3',
+          '#7E4E60'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#B287A3',
+          '#7E4E60',
+          '#BDFFFD',
+          '#7E4E60',
+          '#B287A3'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#BDFFFD',
+          '#482728',
+          '#B287A3',
+          '#482728',
+          '#BDFFFD'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#482728',
+          '#7E4E60',
+          '#482728',
+          '#7E4E60',
+          '#482728'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#0075C4',
+          '#5E747F',
+          '#BDFFFD',
+          '#5E747F',
+          '#0075C4'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#0267C1',
+          '#0075C4',
+          '#0267C1',
+          '#0075C4',
+          '#0267C1'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#D65108',
+          '#0267C1',
+          '#D65108',
+          '#0267C1',
+          '#D65108'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#0267C1',
+          '#D65108',
+          '#38A700',
+          '#D65108',
+          '#0267C1'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#38A700',
+          '#38A700',
+          '#0267C1',
+          '#38A700',
+          '#D65108'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#31D843',
+          '#D65108',
+          '#0267C1',
+          '#D65108',
+          '#31D843'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#3EFF8B',
+          '#386C0B',
+          '#3EFF8B',
+          '#386C0B',
+          '#3EFF8B'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#31D843',
+          '#3EFF8B',
+          '#386C0B',
+          '#3EFF8B',
+          '#31D843'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#3EFF8B',
+          '#31D843',
+          '#3EFF8B',
+          '#31D843',
+          '#3EFF8B'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#3EFF8B',
+          '#31D843',
+          '#38A700',
+          '#31D843',
+          '#3EFF8B'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#38A700',
+          '#31D843',
+          '#38A700',
+          '#31D843',
+          '#38A700'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#38A700',
+          '#31D843',
+          '#293F14',
+          '#31D843',
+          '#38A700'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#139A43',
+          '#0B5D1E',
+          '#053B06',
+          '#0DAB76',
+          '#139A43'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#0B5D1E',
+          '#293F14',
+          '#31D843',
+          '#0B5D1E',
+          '#293F14'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#293F14',
+          '#FF87AB',
+          '#645DD7',
+          '#FF87AB',
+          '#FF47DA'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#645DD7',
+          '#FF87AB',
+          '#645DD7',
+          '#FF87AB',
+          '#645DD7'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#645DD7',
+          '#FB62F6',
+          '#FF87AB',
+          '#645DD7',
+          '#FB62F6'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#FB62F6',
+          '#645DD7',
+          '#FB62F6',
+          '#645DD7',
+          '#FB62F6'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#FF4242',
+          '#F2FF49',
+          '#FF4242',
+          '#F2FF49',
+          '#FF4242'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#F2FF49',
+          '#FF4242',
+          '#F2FF49',
+          '#FF4242',
+          '#F2FF49'
+        ],
+        rarity: 1
+      },
+      {
+        value: [
+          '#F2FF49',
+          '#FF4242',
+          '#645DD7',
+          '#F2FF49',
+          '#FF4242'
+        ],
+        rarity: 1
+      },
     ]
   };
 
@@ -207,6 +1210,7 @@ export class DonutComponent implements AfterContentInit{
 
   activeIcingColors = [];
   activeDoughColors = [];
+  activeBackgroundColors = [];
 
   lastRandom = 0;
 
@@ -246,9 +1250,6 @@ export class DonutComponent implements AfterContentInit{
         this.rarities.icing_type[1] = this.variants.icing_type[index].rarity;
         icing_type_rarity_scale_selected = true;
       } else {
-        this.rarities.icing_type[0] = this.variants.icing_type[index].value;
-        this.rarities.icing_type[1] = this.variants.icing_type[index].rarity;
-        icing_type_rarity_scale_selected = true;
         icing_type_rarity_scale = icing_type_rarity_scale - this.variants.icing_type[index].rarity;
         return;
       }
@@ -272,9 +1273,6 @@ export class DonutComponent implements AfterContentInit{
         this.rarities.icing_color[1] = this.variants.icing_color[index].rarity;
         icing_color_rarity_scale_selected = true;
       } else {
-        this.rarities.icing_color[0] = this.variants.icing_color[index].value;
-        this.rarities.icing_color[1] = this.variants.icing_color[index].rarity;
-        icing_color_rarity_scale_selected = true;
         icing_color_rarity_scale = icing_color_rarity_scale - this.variants.icing_color[index].rarity;
         return;
       }
@@ -286,27 +1284,45 @@ export class DonutComponent implements AfterContentInit{
         return;
       }
       if (index === this.variants.dough_color.length - 1) {
-        this.activeIcingColors = this.variants.dough_color[index].value;
+        this.activeDoughColors = this.variants.dough_color[index].value;
         this.rarities.dough_color[0] = this.variants.dough_color[index].value;
         this.rarities.dough_color[1] = this.variants.dough_color[index].rarity;
         dough_color_rarity_scale_selected = true;
         return;
       }
       if ((this.metadata.dough_color / 2.55) > (dough_color_rarity_scale - this.variants.dough_color[index].rarity)) {
-        this.activeIcingColors = this.variants.dough_color[index].value;
+        this.activeDoughColors = this.variants.dough_color[index].value;
         this.rarities.dough_color[0] = this.variants.dough_color[index].value;
         this.rarities.dough_color[1] = this.variants.dough_color[index].rarity;
         dough_color_rarity_scale_selected = true;
       } else {
-        this.rarities.dough_color[0] = this.variants.dough_color[index].value;
-        this.rarities.dough_color[1] = this.variants.dough_color[index].rarity;
-        dough_color_rarity_scale_selected = true;
         dough_color_rarity_scale = dough_color_rarity_scale - this.variants.dough_color[index].rarity;
         return;
       }
     });
-    console.dir(this.metadata);
-    console.dir(this.rarities);
+    let background_color_rarity_scale = 100;
+    let background_color_rarity_scale_selected = false;
+    this.variants.background_color.forEach((background_color, index) => {
+      if (background_color_rarity_scale_selected === true) {
+        return;
+      }
+      if (index === this.variants.background_color.length - 1) {
+        this.activeBackgroundColors = this.variants.background_color[index].value;
+        this.rarities.background_color[0] = this.variants.background_color[index].value;
+        this.rarities.background_color[1] = this.variants.background_color[index].rarity;
+        background_color_rarity_scale_selected = true;
+        return;
+      }
+      if ((this.metadata.background_color / 2.55) > (background_color_rarity_scale - this.variants.background_color[index].rarity)) {
+        this.activeBackgroundColors = this.variants.background_color[index].value;
+        this.rarities.background_color[0] = this.variants.background_color[index].value;
+        this.rarities.background_color[1] = this.variants.background_color[index].rarity;
+        background_color_rarity_scale_selected = true;
+      } else {
+        background_color_rarity_scale = background_color_rarity_scale - this.variants.background_color[index].rarity;
+        return;
+      }
+    });
     this.donutService.rarities.next(this.rarities);
     this.donutService.metadata.next(this.metadata);
   }
@@ -325,6 +1341,8 @@ export class DonutComponent implements AfterContentInit{
     randomed = Math.floor(Math.random() * (this.variants.dough_color.length - 1));
 
     this.activeDoughColors = this.variants.dough_color[randomed].value;
+
+    this.activeBackgroundColors = this.variants.background_color[0].value;
 
     if (this.randomizeLoopThese === true) {
 

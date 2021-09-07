@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Web3Service } from 'src/app/web3.service';
 import { BehaviorSubject } from 'rxjs';
@@ -26,9 +26,6 @@ export class ViewDonutComponent implements OnInit, AfterContentInit {
     this.snapshot.params.subscribe((result) => {
       this.id = result.id;
       this.web3.getSpecificDonut(this.id);
-      this.metadata.subscribe(test => {
-        console.dir(test);
-      });
     });
   }
 

@@ -1,10 +1,10 @@
     <span class="tag">
         <div></div>
-        <app-timer></app-timer>
+        <app-timer *ngIf="(mintingOpened | async) === false" [@fadeAnimations]></app-timer>
         <div id="hodler-info">
-            <p>
+            <!-- <p>
                 Donut Hodlers: {{owners | async}}
-            </p>
+            </p> -->
             <p>
                 Donuts you Hodl: {{youOwn}}
             </p>
@@ -17,7 +17,7 @@
                 <small>(minting)</small> Baking Cost: {{(mintCost | async) / 1e18}} ETH
             </p>
         </div>
-        <div class="minter" (click)="mintDonuts()">
+        <div *ngIf="(mintingOpened | async) === true" class="minter" (click)="mintDonuts()" [@fadeAnimations]>
             <p>
                 {{mintButtonText | async}}
             </p>
