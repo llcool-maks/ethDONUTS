@@ -1,17 +1,53 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, Input, HostBinding, AfterContentInit } from '@angular/core';
-import { DonutService } from './donut.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { DonutService } from '../donut.service';
+import { Web3Service } from 'src/app/web3.service';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
-  selector: 'app-donut',
-  templateUrl: './donut.component.html',
-  styleUrls: ['./donut.component.scss']
+  selector: 'app-donut-json',
+  templateUrl: './donut-json.component.html',
+  styleUrls: ['./donut-json.component.scss']
 })
-export class DonutComponent implements AfterContentInit{
+export class DonutJsonComponent implements OnInit, AfterContentInit {
 
-  @Input() indexed = -1;
-  @Input() @HostBinding('class.wide') wide = false;
-  @Input() @HostBinding('class.small') small = false;
+  id;
+  metadata: BehaviorSubject<any> = this.web3.specificDonut;
+
+  rarities = {
+    icing_type: ['', 0],
+    icing_color: [[], 0],
+    dough_color: [[], 2],
+    background_color: [[], 3]
+  };
+  json = {
+    name: '',
+    image: '',
+    attributes: [
+    {
+      value: '',
+      trait_type: '',
+    },
+    {
+      value: [],
+      trait_type: '',
+    },
+    {
+      value: [],
+      trait_type: '',
+    },
+    {
+      value: [],
+      trait_type: '',
+    }],
+    description: '',
+    external_url: 'https://ethdonuts.art/#/'
+  };
+
+  metadataFromService = this.donutService.metadata;
+  raritiesFromService = this.donutService.rarities;
+
   variants = {
     icing_type: [
       {
@@ -1358,59 +1394,42 @@ export class DonutComponent implements AfterContentInit{
     ]
   };
 
-  @ViewChild('donut') donut: ElementRef;
-
-  @Input() randomizeThese = true;
-  @Input() randomizeLoopThese = true;
-
-  @Input() metadata = {
-    0: 1,
-    1: 2,
-    2: 3,
-    3: 4,
-    icing_type: 0,
-    icing_color: 0,
-    dough_color: 2,
-    background_color: 3
-  };
-
-  rarities = {
-    icing_type: ['', 0],
-    icing_color: [[], 0],
-    dough_color: [[], 2],
-    background_color: [[], 3]
-  };
-
-  convertedMetadataDonutStyles = {
-    icing_type: 0,
-    icing_color: 0,
-    dough_color: 2,
-    background_color: 3
-  };
-
   activeIcingColors = [];
   activeDoughColors = [];
   activeBackgroundColors = [];
 
-  lastRandom = 0;
-
   constructor(
-    private renderer: Renderer2,
-    private donutService: DonutService
-  ) { }
+    private snapshot: ActivatedRoute,
+    private web3: Web3Service,
+    private donutService: DonutService,
+    private http: HttpClient
+  ) {
 
-  ngAfterContentInit(): void {
-    setTimeout(() => {
-      if (this.randomizeThese) {
-        this.randomize();
-      } else {
-        this.calculateRarities();
+   }
+
+  ngOnInit(): void {
+    this.snapshot.params.subscribe((result) => {
+      if (result.id === undefined) {
+        this.id = -1;
+        return;
       }
-    }, 500);
+      this.id = result.id;
+      this.web3.getSpecificDonut(this.id);
+
+      const thefile = new Blob([JSON.stringify(this.convertToJson())], { type: 'application/json' }) ;
+      const url = window.URL.createObjectURL(thefile);
+      window.location.href = url;
+    });
   }
 
-  calculateRarities(): void {
+  ngAfterContentInit(): void {
+  }
+
+  convertToJson(): {} {
     // tslint:disable:variable-name
+    this.json.name = 'EthDonut ' + this.id;
+    this.json.image = 'https://ethdonuts.art/#/raw-donuts/' + this.id;
+
     let icing_type_rarity_scale = 100;
     let icing_type_rarity_scale_selected = false;
     this.variants.icing_type.forEach((icing_type, index) => {
@@ -1418,16 +1437,18 @@ export class DonutComponent implements AfterContentInit{
         return;
       }
       if (index === this.variants.icing_type.length - 1) {
-        this.renderer.addClass(this.donut.nativeElement, this.variants.icing_type[index].value);
         this.rarities.icing_type[0] = this.variants.icing_type[index].value;
         this.rarities.icing_type[1] = this.variants.icing_type[index].rarity;
+        this.json.attributes[0].value = this.variants.icing_type[index].value;
+        this.json.attributes[0].trait_type = 'Icing Type';
         icing_type_rarity_scale_selected = true;
         return;
       }
-      if ((this.metadata.icing_type / 2.55) > (icing_type_rarity_scale - this.variants.icing_type[index].rarity)) {
-        this.renderer.addClass(this.donut.nativeElement, this.variants.icing_type[index].value);
+      if ((this.metadata.getValue().icing_type / 2.55) > (icing_type_rarity_scale - this.variants.icing_type[index].rarity)) {
         this.rarities.icing_type[0] = this.variants.icing_type[index].value;
         this.rarities.icing_type[1] = this.variants.icing_type[index].rarity;
+        this.json.attributes[0].value = this.variants.icing_type[index].value;
+        this.json.attributes[0].trait_type = 'Icing Type';
         icing_type_rarity_scale_selected = true;
       } else {
         icing_type_rarity_scale = icing_type_rarity_scale - this.variants.icing_type[index].rarity;
@@ -1444,13 +1465,17 @@ export class DonutComponent implements AfterContentInit{
         this.activeIcingColors = this.variants.icing_color[index].value;
         this.rarities.icing_color[0] = this.variants.icing_color[index].value;
         this.rarities.icing_color[1] = this.variants.icing_color[index].rarity;
+        this.json.attributes[1].value = this.variants.icing_color[index].value;
+        this.json.attributes[1].trait_type = 'Icing Color';
         icing_color_rarity_scale_selected = true;
         return;
       }
-      if ((this.metadata.icing_color / 2.55) > (icing_color_rarity_scale - this.variants.icing_color[index].rarity)) {
+      if ((this.metadata.getValue().icing_color / 2.55) > (icing_color_rarity_scale - this.variants.icing_color[index].rarity)) {
         this.activeIcingColors = this.variants.icing_color[index].value;
         this.rarities.icing_color[0] = this.variants.icing_color[index].value;
         this.rarities.icing_color[1] = this.variants.icing_color[index].rarity;
+        this.json.attributes[1].value = this.variants.icing_color[index].value;
+        this.json.attributes[1].trait_type = 'Icing Color';
         icing_color_rarity_scale_selected = true;
       } else {
         icing_color_rarity_scale = icing_color_rarity_scale - this.variants.icing_color[index].rarity;
@@ -1467,13 +1492,17 @@ export class DonutComponent implements AfterContentInit{
         this.activeDoughColors = this.variants.dough_color[index].value;
         this.rarities.dough_color[0] = this.variants.dough_color[index].value;
         this.rarities.dough_color[1] = this.variants.dough_color[index].rarity;
+        this.json.attributes[2].value = this.variants.dough_color[index].value;
+        this.json.attributes[2].trait_type = 'Dough Color';
         dough_color_rarity_scale_selected = true;
         return;
       }
-      if ((this.metadata.dough_color / 2.55) > (dough_color_rarity_scale - this.variants.dough_color[index].rarity)) {
+      if ((this.metadata.getValue().dough_color / 2.55) > (dough_color_rarity_scale - this.variants.dough_color[index].rarity)) {
         this.activeDoughColors = this.variants.dough_color[index].value;
         this.rarities.dough_color[0] = this.variants.dough_color[index].value;
         this.rarities.dough_color[1] = this.variants.dough_color[index].rarity;
+        this.json.attributes[2].value = this.variants.dough_color[index].value;
+        this.json.attributes[2].trait_type = 'Dough Color';
         dough_color_rarity_scale_selected = true;
       } else {
         dough_color_rarity_scale = dough_color_rarity_scale - this.variants.dough_color[index].rarity;
@@ -1490,13 +1519,17 @@ export class DonutComponent implements AfterContentInit{
         this.activeBackgroundColors = this.variants.background_color[index].value;
         this.rarities.background_color[0] = this.variants.background_color[index].value;
         this.rarities.background_color[1] = this.variants.background_color[index].rarity;
+        this.json.attributes[3].value = this.variants.background_color[index].value;
+        this.json.attributes[3].trait_type = 'Background Colors';
         background_color_rarity_scale_selected = true;
         return;
       }
-      if ((this.metadata.background_color / 2.55) > (background_color_rarity_scale - this.variants.background_color[index].rarity)) {
+      if ((this.metadata.getValue().background_color / 2.55) > (background_color_rarity_scale - this.variants.background_color[index].rarity)) {
         this.activeBackgroundColors = this.variants.background_color[index].value;
         this.rarities.background_color[0] = this.variants.background_color[index].value;
         this.rarities.background_color[1] = this.variants.background_color[index].rarity;
+        this.json.attributes[3].value = this.variants.background_color[index].value;
+        this.json.attributes[3].trait_type = 'Background Colors';
         background_color_rarity_scale_selected = true;
       } else {
         background_color_rarity_scale = background_color_rarity_scale - this.variants.background_color[index].rarity;
@@ -1505,31 +1538,8 @@ export class DonutComponent implements AfterContentInit{
     });
     this.donutService.rarities.next(this.rarities);
     this.donutService.metadata.next(this.metadata);
-  }
 
-  randomize(): void {
-    let randomed = Math.floor(Math.random() * (this.variants.icing_type.length - 1));
-
-    this.renderer.removeClass(this.donut.nativeElement, this.variants.icing_type[this.lastRandom].value);
-    this.renderer.addClass(this.donut.nativeElement, this.variants.icing_type[randomed].value);
-    this.lastRandom = randomed;
-
-    randomed = Math.floor(Math.random() * (this.variants.icing_color.length - 1));
-
-    this.activeIcingColors = this.variants.icing_color[randomed].value;
-
-    randomed = Math.floor(Math.random() * (this.variants.dough_color.length - 1));
-
-    this.activeDoughColors = this.variants.dough_color[randomed].value;
-
-    this.activeBackgroundColors = this.variants.background_color[0].value;
-
-    if (this.randomizeLoopThese === true) {
-
-      setTimeout(() => {
-        this.randomize();
-      }, 2500);
-    }
+    return this.json;
   }
 
 }

@@ -10,7 +10,6 @@ import { BehaviorSubject } from 'rxjs';
 export class NewlyMintedPopUpComponent implements OnInit, AfterContentInit {
 
   object = this.web3.objectName;
-  mostRecentObject = this.web3.specificDonut;
   constructor(
     private web3: Web3Service
   ) { }

@@ -16,6 +16,7 @@ export class ViewDonutComponent implements OnInit, AfterContentInit {
 
   metadataFromService = this.donutService.metadata;
   raritiesFromService = this.donutService.rarities;
+
   constructor(
     private snapshot: ActivatedRoute,
     private web3: Web3Service,
@@ -24,8 +25,13 @@ export class ViewDonutComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.snapshot.params.subscribe((result) => {
+      if (result.id === undefined) {
+        this.id = -1;
+        return;
+      }
       this.id = result.id;
       this.web3.getSpecificDonut(this.id);
+      this.metadata = this.web3.specificDonut;
     });
   }
 

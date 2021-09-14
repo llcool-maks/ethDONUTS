@@ -2,9 +2,9 @@
     p {
         text-align:center;
         margin:0px;
-        font-size:1rem;
+        font-size:1.5rem;
         small {
-            font-size: 0.5rem;
+            font-size: 1rem;
         }
     }
     display:grid;
@@ -13,7 +13,7 @@
     align-content: start;
     align-items: start;
     span.countdown {      
-    
+        font-size:1.5rem;
         span.days {
         }
         span.minutes {

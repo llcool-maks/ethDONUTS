@@ -72,7 +72,9 @@ export class Web3Service {
   onHomePage: BehaviorSubject<boolean> = new BehaviorSubject(true); // LINE 101 (DISABLED) - TELLS APP IF BROWSER IS CONNECTED TO THE INTERNET OR NOT
   // CONTRACT VARIABLES
   EthDonutsContract; // LINE 141-161 - THIS OBJECT IS YOUR ACTUAL SOLIDITY CONTRACT, INITIALIZED WITH THE ABI JSON AND THE CONTRACT'S ADDRESS
-  EthDonutsAddress = '0x2b6be957c03cd5907846d38aa789F02Cf97B474d'; // LINE 161 - GETS CALLED TO BUILD THE CONTRACT
+  EthDonutsAddress = '0x68899e90C6E2751C101A564592e4619D073d0aa8'; // LINE 161 - GETS CALLED TO BUILD THE CONTRACT // MAINNET
+  // EthDonutsAddress = '0x15d90E36FF3Be6B53f2CDE7651a112fDB293612c'; // LINE 161 - GETS CALLED TO BUILD THE CONTRACT // ROPSTEN
+  // EthDonutsAddress = '0xD3D70EeE33f77b3bE34eA1e6D95278bc2FCeD2a8'; // LINE 161 - GETS CALLED TO BUILD THE CONTRACT // RINKEBY
   mintedDonuts = new BehaviorSubject(2); // LINED 161 - THIS IS THE AMOUNT OF CURRENTLY MINTED DONUTS, PULLED FROM THE CONTRACT VIA WEB3
   maxMintedDonuts = new BehaviorSubject(2); // LINED 155 - THIS IS THE AMOUNT OF CURRENTLY MINTED DONUTS, PULLED FROM THE CONTRACT VIA WEB3
   mintCost = new BehaviorSubject(2); // LINE 138 - THIS IS THE COST OF MINTING EACH DONUT, PULLED FROM THE CONTRACT VIA WEB3
@@ -171,7 +173,7 @@ export class Web3Service {
         await this.EthDonutsContract.methods.ownerOf(index).call().then((resultsIsOwner: any) => {
           if (resultsIsOwner === this.myAddress.getValue()) {
             this.userStoredDonutCount = this.userStoredDonutCount + 1;
-            this.userDonuts.push([results, index]);
+            this.userDonuts.push({result: results, realIndex: index});
           }
         }).catch({});
       }).catch({});
@@ -186,28 +188,66 @@ export class Web3Service {
   }
 
   async mintDonut(): Promise<any> {
+    if (Number(this.web3.eth.getBalance(this.myAddress.getValue())) > this.mintCost.getValue()) {
+    } else {
+      this.mintButtonText.next('Insuff. Funds.');
+      setTimeout(() => {
+        this.mintButtonText.next('Mint Donut');
+      }, 2500);
+      return;
+    }
+
     if (this.mintButtonText.getValue() === 'Minting...' || this.mintButtonText.getValue() === 'Minting Already...') {
       this.mintButtonText.next('Minting Already...');
       return;
     }
     this.mintButtonText.next('Minting...');
-    this.EthDonutsContract.methods
-    .claim()
-    .send({from: this.myAddress.getValue(), value: this.mintCost.getValue()}).then((result: any) => {
-      this.displayMintedDonutAfterItsMinted(result.events.NewAsset.returnValues.tokenId);
-      if (result.status === true) {
-        this.mintButtonText.next('Minted');
-        setTimeout(() => {
+    const contractMethod = this.EthDonutsContract.methods.claim();
+    let options = {from: this.myAddress.getValue(), value: this.mintCost.getValue(), gas: 1};
+    // .send({from: this.myAddress.getValue(), value: this.mintCost.getValue()}).then((result: any) => {
+    //   this.displayMintedDonutAfterItsMinted(result.events.NewAsset.returnValues.tokenId);
+    //   if (result.status === true) {
+    //     this.mintButtonText.next('Minted');
+    //     setTimeout(() => {
+    //         this.mintButtonText.next('Mint Donut');
+    //       }, 2500);
+    //   } else {
+    //     this.mintButtonText.next('Failed');
+    //     setTimeout(() => {
+    //       this.mintButtonText.next('Mint Donut');
+    //     }, 2500);
+    //   }
+    // }).catch(() => {
+    //   this.mintButtonText.next('Cancelled');
+    //   setTimeout(() => {
+    //     this.mintButtonText.next('Mint Donut');
+    //   }, 2500);
+    // }); // mint isn't called because this is an internal function in which it would end up being free for the public
+    const gasFee = await contractMethod.estimateGas(options);
+    options = {
+      ...options,
+      gas: Math.floor(1.2 * gasFee)
+    };
+
+    contractMethod.send(options).then((result: any) => {
+        this.displayMintedDonutAfterItsMinted(result.events.NewAsset.returnValues.tokenId);
+        if (result.status === true) {
+          this.mintButtonText.next('Minted');
+          setTimeout(() => {
+              this.mintButtonText.next('Mint Donut');
+            }, 2500);
+        } else {
+          this.mintButtonText.next('Failed');
+          setTimeout(() => {
             this.mintButtonText.next('Mint Donut');
           }, 2500);
-      } else {
-        this.mintButtonText.next('Failed');
+        }
+      }).catch(() => {
+        this.mintButtonText.next('Cancelled');
         setTimeout(() => {
           this.mintButtonText.next('Mint Donut');
         }, 2500);
-      }
-    }).catch({
-    }); // mint isn't called because this is an internal function in which it would end up being free for the public
+      }); // mint isn't called because this is an internal function in which it would end up being free for the public
   }
 
   async displayMintedDonutAfterItsMinted(id: number): Promise<any> {

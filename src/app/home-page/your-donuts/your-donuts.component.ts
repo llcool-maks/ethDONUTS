@@ -16,7 +16,7 @@ export class YourDonutsComponent implements AfterContentInit {
   @ViewChild('yourDonuts') private yourDonuts: ElementRef;
   @HostListener('window:mousewheel', ['$event'])
   onMouseWheel(event: MouseWheelEvent): void {
-    this.scrollToElement(event.deltaY);
+    this.scrollToElement(event.layerY);
   }
 
   constructor(

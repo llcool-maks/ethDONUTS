@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewlyMintedPopUpModule } from './newly-minted-pop-up/newly-minted-pop-up.module';
 import { BackButtonModule } from './back-button/back-button.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BackButtonModule } from './back-button/back-button.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     NewlyMintedPopUpModule,
-    BackButtonModule
+    BackButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

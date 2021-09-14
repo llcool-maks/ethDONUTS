@@ -95,15 +95,30 @@
                 }
             }
         }
-        div.info-button {
+        a.post-github, a.post-discord, a.post-info {
+            opacity:0;
+            pointer-events: none;
+            transition: 0.2s;
+            color: $pink;
+            padding:2rem;
+            font-size:1.5rem;
+        }
+        div.info-button, a.info-button, a.discord-button, a.github-button {
             grid-area: donuts;
             align-self: end;
+            z-index:6;
             &:hover {
+                z-index:5;
                 svg {
                     fill:$pink;
                     border:5px solid $white;
                     border-radius:100px;
                     transform:scale(4);
+                }
+                & + a.post {
+                    opacity:1;
+                    transform:translateY(-20vh);
+                    background:$white;
                 }
             }
             svg {
@@ -111,6 +126,12 @@
                 pointer-events: all;
                 cursor: pointer;
             }
+        }
+        a.discord-button {
+            transform:translateX(96px);
+        }
+        a.github-button {
+            transform:translateX(192px);
         }
         @media (max-width:650px) {
             grid-template-areas:
